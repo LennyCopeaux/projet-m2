@@ -37,14 +37,14 @@ export default function LoginPage() {
         <div className="mb-6">
           <Link
             href="/"
-            className="text-sm text-black/60 hover:text-black transition-colors"
+            className="text-sm text-[#060202]/60 hover:text-[#aa3030] transition-colors"
           >
             ← Retour à l&apos;accueil
           </Link>
         </div>
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-normal text-black mb-2">Connexion</h1>
-          <p className="text-sm text-black/60">Accédez à votre compte</p>
+          <h1 className="text-3xl font-normal text-[#060202] mb-2">Connexion</h1>
+          <p className="text-sm text-[#060202]/60">Accédez à votre compte</p>
         </div>
 
         {error && (
@@ -55,7 +55,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm text-black/70 mb-2">
+            <label htmlFor="email" className="block text-sm text-[#060202]/70 mb-2">
               Email
             </label>
             <input
@@ -64,13 +64,13 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
-              placeholder="votre@email.com"
+              className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
+              placeholder="john.doe@email.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm text-black/70 mb-2">
+            <label htmlFor="password" className="block text-sm text-[#060202]/70 mb-2">
               Mot de passe
             </label>
             <input
@@ -79,7 +79,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
+              className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
               placeholder="••••••••"
             />
           </div>
@@ -87,16 +87,16 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full px-6 py-3 bg-black text-white hover:bg-black/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-lg font-medium"
+            className="w-full px-6 py-3 bg-[#aa3030] text-white hover:bg-[#8a2525] disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-lg font-medium"
           >
             {isLoading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-black/60">
+          <p className="text-sm text-[#060202]/60">
             Pas encore de compte ?{' '}
-            <Link href="/register" className="text-black underline">
+            <Link href="/register" className="text-[#aa3030] hover:text-[#8a2525] underline transition-colors">
               S&apos;inscrire
             </Link>
           </p>

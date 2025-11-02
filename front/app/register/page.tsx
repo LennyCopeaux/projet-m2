@@ -52,14 +52,14 @@ export default function RegisterPage() {
         <div className="mb-6">
           <Link
             href="/"
-            className="text-sm text-black/60 hover:text-black transition-colors"
+            className="text-sm text-[#060202]/60 hover:text-[#aa3030] transition-colors"
           >
             ← Retour à l&apos;accueil
           </Link>
         </div>
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-normal text-black mb-2">Inscription</h1>
-          <p className="text-sm text-black/60">Créez votre compte</p>
+          <h1 className="text-3xl font-normal text-[#060202] mb-2">Inscription</h1>
+          <p className="text-sm text-[#060202]/60">Créez votre compte</p>
         </div>
 
         {error && (
@@ -71,7 +71,7 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm text-black/70 mb-2">
+              <label htmlFor="firstName" className="block text-sm text-[#060202]/70 mb-2">
                 Prénom
               </label>
               <input
@@ -80,12 +80,12 @@ export default function RegisterPage() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
-                placeholder="Prénom"
+                className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
+                placeholder="John"
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm text-black/70 mb-2">
+              <label htmlFor="lastName" className="block text-sm text-[#060202]/70 mb-2">
                 Nom
               </label>
               <input
@@ -94,14 +94,14 @@ export default function RegisterPage() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
-                placeholder="Nom"
+                className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
+                placeholder="Doe"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm text-black/70 mb-2">
+            <label htmlFor="email" className="block text-sm text-[#060202]/70 mb-2">
               Email
             </label>
             <input
@@ -110,13 +110,13 @@ export default function RegisterPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
-              placeholder="votre@email.com"
+              className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
+              placeholder="john.doe@email.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm text-black/70 mb-2">
+            <label htmlFor="password" className="block text-sm text-[#060202]/70 mb-2">
               Mot de passe
             </label>
             <input
@@ -125,13 +125,13 @@ export default function RegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
+              className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
               placeholder="••••••••"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm text-black/70 mb-2">
+            <label htmlFor="confirmPassword" className="block text-sm text-[#060202]/70 mb-2">
               Confirmer le mot de passe
             </label>
             <input
@@ -140,7 +140,7 @@ export default function RegisterPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-black/20 bg-white text-black placeholder-black/40 focus:outline-none focus:border-black rounded-lg"
+              className="w-full px-4 py-2.5 border border-[#060202]/20 bg-white text-[#060202] placeholder-[#060202]/40 focus:outline-none focus:border-[#aa3030] rounded-lg"
               placeholder="••••••••"
             />
           </div>
@@ -148,16 +148,16 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full px-6 py-3 bg-black text-white hover:bg-black/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-lg font-medium"
+            className="w-full px-6 py-3 bg-[#aa3030] text-white hover:bg-[#8a2525] disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-lg font-medium"
           >
             {isLoading ? 'Inscription...' : "S'inscrire"}
           </button>
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-black/60">
+          <p className="text-sm text-[#060202]/60">
             Déjà un compte ?{' '}
-            <Link href="/login" className="text-black underline">
+            <Link href="/login" className="text-[#aa3030] hover:text-[#8a2525] underline transition-colors">
               Se connecter
             </Link>
           </p>

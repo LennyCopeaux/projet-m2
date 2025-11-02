@@ -2,7 +2,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #060202;
+  --primary: #aa3030;
+  --primary-hover: #8a2525;
+  --accent-gold: #d7a20a;
+  --accent-gold-light: #f5d76e;
+  --warm-beige: #dfc09f;
+  --warm-brown: #8d602c;
+  --border: rgba(6, 2, 2, 0.1);
+  --border-strong: rgba(6, 2, 2, 0.2);
 }
 
 @theme inline {
@@ -12,10 +20,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Désactiver le mode sombre pour garder le fond blanc */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #060202;
   }
 }
 

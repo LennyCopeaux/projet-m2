@@ -1,11 +1,11 @@
 {
-  "name": "Projet M2",
-  "short_name": "Projet M2",
-  "description": "Application Next.js PWA",
+  "name": "Bookledge",
+  "short_name": "Bookledge",
+  "description": "Bibliothèque en ligne personnelle",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#aa3030",
   "orientation": "portrait-primary",
   "icons": [
     {
