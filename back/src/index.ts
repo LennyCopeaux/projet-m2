@@ -9,10 +9,38 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
+// Middleware CORS
+const allowedOrigins = [
+  'http://localhost:3000',
+  ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : []),
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Permettre les requêtes sans origine (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    
+    // Permettre localhost en développement
+    if (process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    
+    // Vérifier si l'origine est autorisée
+    const isAllowed = allowedOrigins.some(allowed => 
+      origin === allowed || origin?.startsWith(allowed)
+    );
+    
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      // En production, être plus strict, mais pour l'instant on autorise tout
+      // TODO: En production, restreindre aux domaines autorisés uniquement
+      callback(null, true);
+    }
+  },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
