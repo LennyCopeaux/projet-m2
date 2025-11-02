@@ -1,4 +1,6 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+import { getApiUrl } from '../utils/api';
+
+const API_URL = getApiUrl();
 
 export interface User {
   id: number;
@@ -35,8 +37,14 @@ export async function register(data: RegisterData): Promise<AuthResponse> {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error || 'Erreur lors de l\'inscription');
+    let errorMessage = 'Erreur lors de l\'inscription';
+    try {
+      const error = await response.json();
+      errorMessage = error.error || errorMessage;
+    } catch {
+      errorMessage = `Erreur ${response.status}: ${response.statusText}`;
+    }
+    throw new Error(errorMessage);
   }
 
   return response.json();
@@ -52,8 +60,14 @@ export async function login(data: LoginData): Promise<AuthResponse> {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error || 'Erreur lors de la connexion');
+    let errorMessage = 'Erreur lors de la connexion';
+    try {
+      const error = await response.json();
+      errorMessage = error.error || errorMessage;
+    } catch {
+      errorMessage = `Erreur ${response.status}: ${response.statusText}`;
+    }
+    throw new Error(errorMessage);
   }
 
   return response.json();
