@@ -2,27 +2,48 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { register, saveToken } from '../services/auth';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function RegisterPage() {
+  const router = useRouter();
+  const { login: setUser } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     
     if (password !== confirmPassword) {
-      alert('Les mots de passe ne correspondent pas');
+      setError('Les mots de passe ne correspondent pas');
       return;
     }
 
     setIsLoading(true);
-    // TODO: Implémenter la logique d'inscription
-    console.log('Inscription:', { firstName, lastName, email, password });
-    setTimeout(() => setIsLoading(false), 1000);
+
+    try {
+      const response = await register({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+
+      saveToken(response.token);
+      setUser(response.user);
+      router.push('/');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -40,6 +61,12 @@ export default function RegisterPage() {
           <h1 className="text-3xl font-normal text-black mb-2">Inscription</h1>
           <p className="text-sm text-black/60">Créez votre compte</p>
         </div>
+
+        {error && (
+          <div className="mb-5 p-4 border border-black/20 bg-white text-black rounded-lg">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">

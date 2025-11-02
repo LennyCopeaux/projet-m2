@@ -2,18 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { login, saveToken } from '../services/auth';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login: setUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setIsLoading(true);
-    // TODO: Implémenter la logique de connexion
-    console.log('Connexion:', { email, password });
-    setTimeout(() => setIsLoading(false), 1000);
+
+    try {
+      const response = await login({ email, password });
+      saveToken(response.token);
+      setUser(response.user);
+      router.push('/');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur lors de la connexion');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -31,6 +46,12 @@ export default function LoginPage() {
           <h1 className="text-3xl font-normal text-black mb-2">Connexion</h1>
           <p className="text-sm text-black/60">Accédez à votre compte</p>
         </div>
+
+        {error && (
+          <div className="mb-5 p-4 border border-black/20 bg-white text-black rounded-lg">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
@@ -76,7 +97,7 @@ export default function LoginPage() {
           <p className="text-sm text-black/60">
             Pas encore de compte ?{' '}
             <Link href="/register" className="text-black underline">
-              S'inscrire
+              S&apos;inscrire
             </Link>
           </p>
         </div>
