@@ -42,7 +42,7 @@ export default function PushNotificationButton() {
       const registration = await navigator.serviceWorker.ready;
       
       // Convertir la clé VAPID en format ArrayBuffer
-      const applicationServerKey = urlBase64ToUint8Array(VAPID_PUBLIC_KEY);
+      const applicationServerKey = urlBase64ToUint8Array(VAPID_PUBLIC_KEY) as BufferSource;
       
       // S'abonner aux notifications push
       const subscription = await registration.pushManager.subscribe({
