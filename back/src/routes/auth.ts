@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
 
     // Insérer l'utilisateur
     const result = await pool.query(
-      'INSERT INTO users (firstname, lastname, email, password, "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, NOW(), NOW()) RETURNING id, email, firstname, lastname',
+      'INSERT INTO users ("firstName", "lastName", email, password, "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, NOW(), NOW()) RETURNING id, email, "firstName", "lastName"',
       [firstName, lastName, email, hashedPassword]
     );
 
@@ -50,8 +50,8 @@ router.post('/register', async (req, res) => {
       user: {
         id: user.id,
         email: user.email,
-        firstName: user.firstname,
-        lastName: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
     });
   } catch (error) {
@@ -72,7 +72,7 @@ router.post('/login', async (req, res) => {
 
     // Récupérer l'utilisateur
     const result = await pool.query(
-      'SELECT id, email, firstname, lastname, password FROM users WHERE email = $1',
+      'SELECT id, email, "firstName", "lastName", password FROM users WHERE email = $1',
       [email]
     );
 
@@ -101,8 +101,8 @@ router.post('/login', async (req, res) => {
       user: {
         id: user.id,
         email: user.email,
-        firstName: user.firstname,
-        lastName: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
     });
   } catch (error) {
@@ -115,7 +115,7 @@ router.post('/login', async (req, res) => {
 router.get('/me', authenticateToken, async (req: AuthRequest, res) => {
   try {
     const result = await pool.query(
-      'SELECT id, email, firstname, lastname FROM users WHERE id = $1',
+      'SELECT id, email, "firstName", "lastName" FROM users WHERE id = $1',
       [req.userId]
     );
 
@@ -129,8 +129,8 @@ router.get('/me', authenticateToken, async (req: AuthRequest, res) => {
       user: {
         id: user.id,
         email: user.email,
-        firstName: user.firstname,
-        lastName: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
     });
   } catch (error) {
